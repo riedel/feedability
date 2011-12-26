@@ -30,7 +30,7 @@ var fs = require('fs'),
 
 // internal libraries
 var cfg = require('./lib/cfg.js'),
-    log = cfg.log,
+    log = new (require('./lib/log.js').Logger)('core'),
     func = require('./lib/func.js'),
     ProxyRequest = require('./lib/proxy.js').ProxyRequest;
 
