@@ -24,13 +24,13 @@ console.log('Feedability : NodeJS Feed Proxy With Readability');
  */
 // built in libraries
 //
-var cfg= require('lib/cfg'),
-    fs = require('fs'),
+var fs = require('fs'),
     http = require('http'),
     util = require('util');
 
 // internal libraries
-var log = new (require('./lib/log.js').Logger)('core'),
+var cfg = require('./lib/cfg.js'),
+    log = new (require('./lib/log.js').Logger)('core'),
     func = require('./lib/func.js'),
     ProxyRequest = require('./lib/proxy.js').ProxyRequest;
 
