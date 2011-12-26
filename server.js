@@ -22,15 +22,120 @@ console.log('Feedability : NodeJS Feed Proxy With Readability');
  * 
  * @fileOverview
  */
+function getcfg(key) {
+  return settings[key];
+}
 
+var cfg={
+"get": getcfg,
+"settings":
+{
+  "proxy":
+  {
+    "bind": "127.0.0.1",
+    "port": 13232,
+    "banner": "Feedability/0.0",
+    "preserve_order": true,
+    "use_auth": false,
+    "auth": "user:pass"
+  },
+
+  "urlopen":
+  {
+    "cache": true,
+    "headers":
+    {
+      "User-Agent": "Mozilla/5.0 (compatible; Feedability/0.0; +https://github.com/4poc/feedability)",
+      "Accept": "*/*"
+    },
+    "ignore_http_charset": true,
+    "convert_charset": true
+  },
+
+  "cookies":
+  {
+    "activate": false,
+    "whitelist": [],
+    "type": "firefox_sqlite",
+    "cookie_jar": "/home/user/.mozilla/firefox/abcdefgh.default/cookies.sqlite"
+  },
+
+  "ce":
+  {
+    "cache": true
+  },
+
+  "ce_single":
+  {
+    "cache": false
+  },
+
+  "filter":
+  {
+    "activate": true,
+    "jquery_url": "http://code.jquery.com/jquery-1.4.2.min.js",
+    "rules":
+    {
+      ".*":
+      {
+        "post": 
+        {
+          "replace": 
+          {
+            "(src|href)=('|\")?(\/)": "$1=$2%{URL_BASE}",
+            "<script[^>]*>([\\s\\S]*?)</script>": " ",
+            "onclick=\"[^\"]+\"": ""
+          },
+          "remove": ["object"]
+        }
+      },
+      "heise.de": 
+      {
+        "pre": 
+        {
+          "remove": ["#mitte_rechts"]
+        }
+      },
+      "carta.info": 
+      {
+        "pre": 
+        {
+          "remove": ["#commentblock"]
+        }
+      },
+      "giessener-allgemeine.de": 
+      {
+        "prepend": [".fettvorspann"]
+      }
+    }
+  },
+
+  "cache":
+  {
+    "path": "./cache"
+  },
+
+  "log": 
+  {
+    "console": true,
+    "stderr": false,
+    "file": true,
+    "file_seperate": false,
+    "syncronized": false,
+    "path": "./logs",
+    "console_level": 3,
+    "file_level": 4
+  }
+
+}
+}
 // built in libraries
 var fs = require('fs'),
     http = require('http'),
     util = require('util');
 
 // internal libraries
-var cfg = require('./lib/cfg.js'),
-    log = new (require('./lib/log.js').Logger)('core'),
+var log = new (require('./lib/log.js').Logger)('core'),
     func = require('./lib/func.js'),
     ProxyRequest = require('./lib/proxy.js').ProxyRequest;
 
