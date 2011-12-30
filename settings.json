@@ -88,7 +88,7 @@
   {
     "console": true,
     "stderr": false,
-    "file": true,
+    "file": false,
     "file_seperate": false,
     "syncronized": false,
     "path": "./logs",
