@@ -11,7 +11,7 @@
 
   "urlopen":
   {
-    "cache": true,
+    "cache": false,
     "headers":
     {
       "User-Agent": "Mozilla/5.0 (compatible; Feedability/0.0; +https://github.com/4poc/feedability)",
@@ -31,7 +31,7 @@
 
   "ce":
   {
-    "cache": true
+    "cache": false
   },
 
   "ce_single":
