@@ -79,7 +79,7 @@
     }
   },
 
-"no-cache":
+"cache":
   {
     "path": "./cache"
   },
@@ -92,7 +92,7 @@
     "file_seperate": false,
     "syncronized": false,
     "path": "./logs",
-    "console_level": 3,
+    "console_level": 1,
     "file_level": 4
   }
 
