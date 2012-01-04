@@ -4,6 +4,8 @@ h1. Feedability
 
 h2. Installation
 
+This version was especially forked for the use with the "nodester":http://nodester.com PAAS. Simply edit the server port in the settings.
+
 I will try to create a first release candidate soon, until now you need to use the master branch. Make sure you've installed a recent version of node ("wiki":https://github.com/ry/node/wiki/) and npm ("README":https://github.com/isaacs/npm#readme). Tested with node 0.6.4 and npm 1.1.0.
 
 * Clone the repository:
@@ -18,7 +20,7 @@ cd feedability/
 <pre>
 npm install readability jsdom node-expat iconv sqlite
 # OR globally:
-sudo npm install -g readability jsdom node-expat iconv sqlite
+sudo npm install -g readability jsdom sax iconv sqlite
 </pre>
 
 * To start the server: @node feedability.js@ ...
@@ -37,7 +39,7 @@ h2. External Copyright and License
 * "node.js":http://nodejs.org/ (Copyright (c) 2009, 2010 Ryan Lienhart Dahl. All rights reserved.): released under the MIT license.
 * "arc90labs-readability":http://code.google.com/p/arc90labs-readability/ (original written by the arc90 team): released under the Apache License 2.0.
 * "node-readability":https://github.com/arrix/node-readability (Copyright (c) 2010 Arrix Zhou): released under the MIT license.
-* "node-expat":https://github.com/astro/node-expat (Copyright (c) 2010 Stephan Maka): released under the MIT license.
+* "node-sax":https://github.com/isaacs/sax-js (Copyright 2009, 2010, 2011 Isaac Z. Schlueter): released under MIT license
 * "node-iconv":https://github.com/bnoordhuis/node-iconv (Copyright (c) 2010 Ben Noordhuis): released under the MIT license.
 * "jquery":http://jquery.com/ (Copyright (c) 2010 The jQuery Project): released under the terms of either the MIT License or the GNU General Public License (GPL) Version 2.
 
