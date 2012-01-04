@@ -38,9 +38,26 @@ var cfg = require('./lib/cfg.js'),
 var bind = cfg.get('proxy')['bind'];
 var port = cfg.get('proxy')['port'];
 
-// create the http server with the feed proxy
-http.createServer(function(request, response) {
+var timeout;
 
+function isdeadlock(){
+ if(server.connections>0)
+ {
+   log.error('timeout connections:'+server.connections);
+   process.exit(1);
+ }
+ else resetTimeout();
+}
+
+function resetTimeout(){
+  log.info('proxy alive:'+server.connections);
+  if(timeout) clearTimeout(timeout);
+  timeout=setTimeout(isdeadlock,60*1000);
+}
+
+// create the http server with the feed proxy
+var server=http.createServer(function(request, response) {
+  resetTimeout()
   try {
     var proxy_request = new ProxyRequest(request, response);
     proxy_request.process();    
@@ -49,7 +66,13 @@ http.createServer(function(request, response) {
     log.error('proxy request exception: '+exception);
   }
 
-}).listen(port, bind);
+});
+
+server.maxConnections = 20;
+server.listen(port, bind);
+
+resetTimeout();
+
 console.log('http server listening on '+bind+' port '+port);
 console.log('open a browser and try: http://127.0.0.1:'+port+'/\n');
 
